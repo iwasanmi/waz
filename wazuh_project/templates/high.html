@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/styles/test.css') }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar" style="background-color: #40f0a6;">
+    <div class="logo-details">
+     
+      <span class="logo_name">Welcome, {{name}}!</span>
+    </div>
+      <ul class="nav-links">
+        {% if current_user.is_authenticated %}
+        <li>
+          <a href="{{ url_for('main.profile') }}">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        <li>
+          <a href="{{ url_for('auth.patch') }}">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Find patches</span>
+          </a>
+        </li>
+        {% endif %}
+
+        <li>
+          <a href="#">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">Order list</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-coin-stack' ></i>
+            <span class="links_name">Stock</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-book-alt' ></i>
+            <span class="links_name">Total order</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Team</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-message' ></i>
+            <span class="links_name">Messages</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">Favrorites</span>
+          </a>
+        </li>
+        {% if current_user.is_authenticated %}
+        <li>
+          <a href="{{ url_for('auth.setup') }}">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Update Server IP</span>
+          </a>
+        </li>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+        <li class="log_out">
+          <a href="{{ url_for('auth.logout') }}">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        
+        <span class="dashboard">Find Patches</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+      <div class="profile-details">
+        <!--<img src="images/profile.jpg" alt="">-->
+        <span class="admin_name">Admin</span>
+        <i class='bx bx-chevron-down' ></i>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic" style="color: rgb(217, 255, 0);">Total Low CVES</div>
+            <div class="number" style="color: rgb(200, 255, 0);">{{ low }}</div>
+            <form method="GET">
+              <div class="button">
+                <a name="low" href="{{ url_for('auth.low')}}">Show All Lows</a>
+              </div>
+            </form>
+           
+          </div>
+          
+        </div>
+        <div class="box">
+          <div class="right-side">
+                
+            <div class="box-topic" style="color: rgb(255, 174, 0);">Total Medium CVEs</div>
+            <div class="number" style="color: rgb(255, 238, 0);">{{ medium }}</div>
+            <form method="GET">
+              <div class="button">
+                <a name="low" href="{{ url_for('auth.medium')}}">Show All Mediums</a>
+              </div>
+            </form>
+            
+          </div>
+          
+          
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic" style="color: rgb(255, 81, 0);">Total High CVEs</div>
+            <div class="number" style="color: rgb(255, 94, 0);">{{ high }}</div>
+            <form method="GET">
+              <div class="button">
+                <a name="low" href="{{ url_for('auth.high')}}">Show All Highs</a>
+              </div>
+            </form>
+            
+          </div>
+          
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic" style="color: rgb(255, 0, 0);">Total Critical CVEs</div>
+            <div class="number" style="color: rgb(255, 0, 0);">{{ critical }}</div>
+            <form method="GET">
+              <div class="button">
+                <a name="low" href="{{ url_for('auth.critical')}}">Show All Criticals</a>
+              </div>
+            </form>
+          </div>
+         
+        </div>
+      </div>
+
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+         
+          <div class="table-wrapper">
+            <div class="title" style="color: green;">Find Patches</div>
+            <link rel="stylesheet" href="{{ url_for('static', filename='/styles/le.css') }}">
+            
+            <table class="fl-table">
+                <thead>
+                  <thead>
+                    <tr>
+                        <th>Agent Name</th>
+                        <th>CVE</th>
+                        <th>CVSS3 Score</th>
+                        <th>CVSS3 Score</th>
+                        <th>Severity</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for things in thigh %}
+                    <tr>
+                        <td>{{ things.Agent_names }}</td>
+                        <td>{{ things.cve }}</td>
+                        <td>{{ things.cvss3_score }}</td>
+                        <td>{{ things.cvss2_score }}</td>
+                        <td>{{ things.severity }}</td>
+                        <td>
+                          <form method="GET">
+                            
+                            <div class="button">
+                              <a name="{ things.cve }" href="{{ url_for('auth.readmore', cve= things.cve)}}">More Info</a>
+                            </div>
+                          </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    <tbody>
+            </table>
+        </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+        <div class="top-sales box">
+          <div class="title" style="color: green;">All Active Agents</div>
+          <link rel="stylesheet" href="{{ url_for('static', filename='/styles/le.css') }}">
+          <table class="fl-table">
+            <thead>
+              <tr>
+                
+                <th><h1>Agent ID</h1></th>
+                <th><h1>Agent Name</h1></th>
+                <th><h1>Agent Status</h1></th>
+                
+                
+              </tr>
+            </thead>
+            
+            <tbody>
+              {% for items in ip %}
+                <tr>
+                 
+                  <td>{{ items.agentid }}</td>
+                  <td>{{ items.name }}</td>
+                  <td>{{ items.status }}</td>
+                  
+                  
+                </tr>
+              {% endfor %}
+                
+              
+                
+              
+              
+            </tbody>
+            
+          </table>
+          <form method="POST" action="">
+            <input type="text" name="ipaddr"  placeholder="Enter IP"></input>
+            <button class='button' type="submit" href="" >Refresh</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
